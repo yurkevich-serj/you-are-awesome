@@ -2,15 +2,25 @@
 
 const createEnumerableProperty = (propertyName) => { return propertyName };
 const createNotEnumerableProperty = (propertyName) => { return Symbol.for(propertyName) };
-const createProtoMagicObject = () => {};
-const incrementor = () => {};
-const asyncIncrementor = () => {};
+const createProtoMagicObject = () => {
+	    let object = () => {};
+        object.prototype = object.__proto__;
+        return object;
+};
+let count = 0;
+const incrementor = () => {
+	    count++;
+        Function.prototype.valueOf = () => count;
+        return incrementor;
+};
+let count1 = 0;
+const asyncIncrementor = () => new Promise(resolve => resolve(++count1));
 const createIncrementer = () => {};
 
 // return same argument not earlier than in one second, and not later, than in two
 const returnBackInSecond = (value) => { return new Promise((resolve) => {
-         setTimeout(() => {
-           resolve(value);}, 1000);
+        setTimeout(() => {
+        resolve(value);}, 1000);
      });};
 const getDeepPropertiesCount = () => {};
 const createSerializedObject = () => { return Object('yeap') };
