@@ -22,7 +22,15 @@ const returnBackInSecond = (value) => { return new Promise((resolve) => {
         setTimeout(() => {
         resolve(value);}, 1000);
      });};
-const getDeepPropertiesCount = () => {};
+const getDeepPropertiesCount = (object) => {
+	    let count3 = 0;
+        for(let key in object){
+        count3++;
+        count3 += getDeepPropertiesCount(object[key]);
+        }
+ 
+        return count3;
+};
 const createSerializedObject = () => { return Object('yeap') };
 const toBuffer = () => {};
 const sortByProto = (array) => { return array.sort((left,right) => left - right) };
